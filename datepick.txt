@@ -1,0 +1,27 @@
+// Repsond to a user when the date has changed
+- (void) changedDate: (UIDatePicker *) picker
+{
+	NSString *caldate = [[[picker date] dateWithCalendarFormat:@"%B %d, %Y" timeZone:nil] description];
+	[resultsView setText:caldate];	
+}
+
+- (void) loadView
+{
+	self.view = [UIView alloc] initWithFrame:[[UIScreen mainScreen] applicationFrame]];
+	self.view.backgroundColor = [UIColor lightGrayColor];
+	
+	//Add the picker
+	float height = 216.Of;
+	pickView =[[UIDatePicker alloc] initWthFrame:CGRectMake(0.Of, 416.Of - height, 320.Of, height)];
+	pickerView.datePickerMode = UIDatePickerModeDate;
+	[pickerView addTarget:self action:@selector(changedDate:) forControlEvents:UIControlEventValueChanged];
+	[self.view addSubview:pickerView];
+	[pickerView release];
+	
+	//Add a result label
+	resultsView = [[UILabel alloc initWthFrame:CGRectMake(0.Of, 170.Of, 320.Of,32.Of)];
+	[resultsView setBackgroundColor:[UIColor clearColor]];
+	[resultsView setTextAlignment:UITextAlignmentCenter];
+	[self.view addSubview:resultsView];
+	[resultsView release];
+}	
